@@ -4,7 +4,6 @@ import ImageGallery from './ImageGallery';
 
 const App = () => {
   const [images, setImages] = useState([]);
-  const [query, setQuery] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
   const fetchImages = async searchQuery => {
@@ -18,7 +17,6 @@ const App = () => {
   };
 
   const handleSearchSubmit = searchQuery => {
-    setQuery(searchQuery);
     fetchImages(searchQuery);
   };
 
