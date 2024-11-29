@@ -7,7 +7,6 @@ function App() {
   // Funcția pentru a căuta imagini folosind query
   const searchImages = async () => {
     if (query) {
-      // Verificăm dacă există o valoare în query
       const response = await fetch(
         `https://pixabay.com/api/?q=${query}&key=45861214-76b95c96ea530b9f2dd96e8b0&image_type=photo&orientation=horizontal&per_page=12`
       );
