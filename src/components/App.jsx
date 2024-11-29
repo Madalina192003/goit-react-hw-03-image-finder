@@ -1,34 +1,40 @@
-import React, { useState } from 'react';
-import Searchbar from './Searchbar';
-import ImageGallery from './ImageGallery';
+import React, { useState, useEffect } from 'react';
 
-const App = () => {
+function App() {
+  const [query, setQuery] = useState(''); // Variabila query
   const [images, setImages] = useState([]);
-  const [query, setQuery] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
 
-  const fetchImages = async searchQuery => {
-    setIsLoading(true);
+  // Funcția de căutare care folosește query pentru a apela API-ul
+  const searchImages = async () => {
     const response = await fetch(
-      `https://pixabay.com/api/?q=${searchQuery}&page=1&key=45861214-76b95c96ea530b9f2dd96e8b0&image_type=photo&orientation=horizontal&per_page=12`
+      `https://pixabay.com/api/?q=${query}&key=45861214-76b95c96ea530b9f2dd96e8b0&image_type=photo&orientation=horizontal&per_page=12`
     );
     const data = await response.json();
     setImages(data.hits);
-    setIsLoading(false);
   };
 
-  const handleSearchSubmit = searchQuery => {
-    setQuery(searchQuery);
-    fetchImages(searchQuery);
-  };
+  // Apelarea funcției searchImages la schimbarea valorii query
+  useEffect(() => {
+    if (query) {
+      searchImages(); // Se face căutarea dacă există un query
+    }
+  }, [query]); // Depinde de query
 
   return (
     <div>
-      <Searchbar onSubmit={handleSearchSubmit} />
-      {isLoading && <p>Loading...</p>}
-      <ImageGallery images={images} />
+      <input
+        type="text"
+        value={query}
+        onChange={e => setQuery(e.target.value)}
+        placeholder="Search for images"
+      />
+      <div>
+        {images.map(image => (
+          <img key={image.id} src={image.webformatURL} alt={image.tags} />
+        ))}
+      </div>
     </div>
   );
-};
+}
 
 export default App;
