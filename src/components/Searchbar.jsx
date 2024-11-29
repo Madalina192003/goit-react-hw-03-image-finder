@@ -1,38 +1,45 @@
 import React, { useState } from 'react';
 
-function Searchbar({ onSubmit }) {
+const Searchbar = ({ onSubmit }) => {
   const [query, setQuery] = useState('');
 
-  const handleInputChange = e => {
-    setQuery(e.target.value);
-  };
+  const handleChange = e => setQuery(e.target.value);
 
   const handleSubmit = e => {
     e.preventDefault();
-    if (query.trim() === '') return;
-    onSubmit(query); // Trimite cuvântul cheie pentru a căuta imagini
-    setQuery('');
+    if (query.trim()) {
+      onSubmit(query);
+    }
   };
 
   return (
-    <header className="searchbar">
-      <form className="form" onSubmit={handleSubmit}>
-        <button type="submit" className="button">
-          <span className="button-label">Search</span>
+    <header style={{ backgroundColor: '#2a2a2a', padding: '20px' }}>
+      <form
+        onSubmit={handleSubmit}
+        style={{ display: 'flex', justifyContent: 'center' }}
+      >
+        <button
+          type="submit"
+          style={{
+            backgroundColor: '#00bfff',
+            color: 'white',
+            padding: '10px',
+            border: 'none',
+            cursor: 'pointer',
+          }}
+        >
+          <span>Search</span>
         </button>
-
         <input
-          className="input"
           type="text"
           value={query}
-          onChange={handleInputChange}
-          autocomplete="off"
-          autofocus
+          onChange={handleChange}
+          style={{ width: '300px', padding: '10px', marginLeft: '10px' }}
           placeholder="Search images and photos"
         />
       </form>
     </header>
   );
-}
+};
 
 export default Searchbar;
