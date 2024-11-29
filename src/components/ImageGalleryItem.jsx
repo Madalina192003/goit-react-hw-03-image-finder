@@ -1,12 +1,11 @@
 import React from 'react';
-import './ImageGalleryItem.css';
 
-const ImageGalleryItem = ({ webformatURL, largeImageURL, onClick }) => {
+function ImageGalleryItem({ image }) {
   return (
-    <li className="gallery-item" onClick={() => onClick(largeImageURL)}>
-      <img src={webformatURL} alt="" />
+    <li className="gallery-item">
+      <img src={image.webformatURL} alt={image.tags} />
     </li>
   );
-};
+}
 
 export default ImageGalleryItem;

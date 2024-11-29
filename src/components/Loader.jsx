@@ -1,11 +1,12 @@
 import React from 'react';
-import { InfinitySpin } from 'react-loader-spinner';
-import './Loader.css';
+import { Oval } from 'react-loader-spinner';
 
-const Loader = () => (
-  <div className="loader">
-    <InfinitySpin width="200" color="#4a90e2" />
-  </div>
-);
+function Loader() {
+  return (
+    <div className="loader">
+      <Oval color="#00BFFF" height={100} width={100} />
+    </div>
+  );
+}
 
 export default Loader;
